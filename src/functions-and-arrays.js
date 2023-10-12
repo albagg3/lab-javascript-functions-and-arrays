@@ -60,7 +60,7 @@ function sum(array) {
   for (let i = 0; i < array.length; i++) {
     const element = array[i];
     if (typeof(element) === 'object')
-      throw("Error")
+      throw new Error("Error")
     if (typeof(element) === 'string')
       sum += element.length;
     else
@@ -138,7 +138,17 @@ function uniquifyArray(uniqueWordsArr) {
 // Iteration #6: Find elements
 const wordsFind = ['machine', 'subset', 'trouble', 'starting', 'matter', 'eating', 'truth', 'disobedience'];
 
-function doesWordExist() {}
+function doesWordExist(wordsArr, wordToSearch) {
+  if (wordsArr.length === 0)
+    return null;
+  for (let i = 0; i < wordsArr.length; i++) 
+  {
+    const element = wordsArr[i];
+    if (element === wordToSearch)
+      return true;
+  }
+  return false;
+}
 
 
 
@@ -157,7 +167,19 @@ const wordsCount = [
   'matter'
 ];
 
-function howManyTimes() {}
+function howManyTimes(wordsArr, wordToSearch) {
+  let counter = 0;
+
+  if (wordsArr.length === 0)
+    return 0;
+  for (let i = 0; i < wordsArr.length; i++) 
+  {
+    const element = wordsArr[i];
+    if (element === wordToSearch)
+      counter++;
+  }
+return counter;
+}
 
 
 
@@ -185,9 +207,27 @@ const matrix = [
   [1, 70, 54, 71, 83, 51, 54, 69, 16, 92, 33, 48, 61, 43, 52, 1, 89, 19, 67, 48]
 ];
 
-function greatestProduct() {}
-
-
+function greatestProduct(matrixArg) {
+  let horizontalValue = 0;
+  let verticalValue = 0;
+  let biggerValue = 0;
+  let result = 0;
+  for (let i = 0 ; i < matrixArg.length - 3; i++)
+  {
+    for (let j = 0; j < matrixArg[i].length - 3; j++)
+    {
+      horizontalValue = matrixArg[i][j] * matrixArg[i][j + 1] * matrixArg[i][j + 2] * matrixArg[i][j + 3]
+      verticalValue = matrixArg[i][j] * matrixArg[i + 1][j] * matrixArg[i + 2][j] * matrixArg[i + 3][j]
+      if (horizontalValue > verticalValue)
+        biggerValue = horizontalValue;
+      else
+        biggerValue = verticalValue;
+      if(result < biggerValue)
+        result = biggerValue;
+    }
+  }
+  return(result)
+}
 
 
 // The following is required to make unit tests work.
